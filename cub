@@ -1,0 +1,22 @@
+x = [ 0 1 2 3 4 5 6];
+y = [1.5 2 2.2 1.8 1.5 0.9 0.7];
+c = zeros(1,length(x));
+d = zeros(1,length(x));
+c(2) = 0;
+d(2)=0;
+h=1;
+for i=2:length(y)-1
+    d(i+1)=d(i)-6*c(i)/h +6*(y(i+1)-2*y(i)+y(i-1))/h^3;
+    c(i+1)=c(i)+h*d(i+1);
+end
+xarr = [];
+yarr = [];
+for j=2:length(y)-1
+    xf=x(j):(x(j+1)-x(j))/7:x(j+1);
+    yf=y(j)+(((y(j)-y(j-1))/h)+h*c(j)/2-h^2*d(j)/6)*(xf-x(j))+(((xf-x(j)).^2)*c(j)/2)+(((xf-x(j)).^3)*d(j))/6;
+    xarr = [xarr xf];
+    yarr = [yarr yf];
+end
+plot(x,y,'o');
+hold on;
+plot (xarr,yarr);
