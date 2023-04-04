@@ -1,0 +1,20 @@
+lim1=0.01;
+lim2=10;
+N=100;
+x=lim1:(lim2-lim1)/N:lim2;
+y=zeros(length(x));
+y=sin(x)./x-0.1;
+y1=zeros(length(x));
+plot(x,y,x,y1);
+M=10;
+for k = 1:M
+    x=lim1:(lim2-lim1)/N:lim2;
+    y=sin(x)./x-0.1;
+    for i=1:length(x)-1
+        if y(i)*y(i+1)<0
+          lim1=x(i);
+          lim2=x(i+1);
+        end
+    end
+end
+root2=(lim1+lim2)/2;
